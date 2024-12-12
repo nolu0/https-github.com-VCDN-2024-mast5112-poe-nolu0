@@ -1,0 +1,33 @@
+import React, { useState, useCallback } from 'react';
+import { Text, View, FlatList, TouchableHighlight, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet } from "react-native";
+import { Alert } from 'react-native';
+
+            // Navigate back to HomeScreen after adding workout
+            ('HomeScreen');
+          
+        {
+            Alert.alert(
+                "Incorrect Information",
+                "Please fill in all fields before adding a Meal",
+                [{ text: "OK" }]
+            );
+        }
+        const[Dish_Name, setDishName]= useState<string>('');
+  const[Course_Type, setCourseType] = useState<string>('');
+  const[Price, setPrice]= useState<string>('');
+
+ const [Workouts, setWorkouts] = useState<[]>([])
+
+ const CourseType = ['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Desert'];//User will choose whatever their prefer under coursetype.
+const [totalPrice, setPricee] = useState<number>(0)
+const totalworkouts = Workouts
+ const handleSubmit =() => {}
+ //Breakfast: Cereal, Toast&Eggs, Smootie
+ //Brunch: Combine breakfast and lunch
+ //Lunch: Burgers& chips, Sushi, Jollof rice, Usu& steam bread
+ //Dinner: Cream Pasta, Mac& Cheese, Creamy stamp
+ //Desert: Ice cream, waffles, pancakes, cheesecake
+
+ // Beverages: Non-alcohol champagne , apple juice , orange , water and alcohol
+ // These are the items that chris offer

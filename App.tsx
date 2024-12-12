@@ -1,192 +1,226 @@
-// src/components/Component.tsx
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, TouchableHighlight, View, SafeAreaView, Alert } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { DishDetails } from './type'; // Adjust the import path as necessary
+import { DishDetails } from './type';
+import { useState } from 'react';
 
-const Component = () => {
-  const [dishName, setDishName] = useState('');
-  const [description, setDescription] = useState('');
-  const [courseType, setCourseType] = useState('Main Course');
-  const [menuItems, setMenuItems] = useState('');
-  const [price, setPrice] = useState('');
-  const [dishes, setDishes] = useState<DishDetails[]>([]);
+export default function App() {
 
-  const handleSubmit = () => {
-    if (dishName && description && courseType && menuItems && price && !isNaN(parseInt(menuItems))) {
-      const newDish: DishDetails = {
-        DishName: dishName,
-        Description: description,
-        Course_Type: courseType,
-        MenuItems: parseInt(menuItems),
-        Price: parseFloat(price),
-        Averageprice: parseInt(price)
-      };
-      setDishes([...dishes, newDish]);
-      clearForm();
-      console.log(newDish);
-    } else {
-      Alert.alert("Please fill out all fields correctly.");
-    }
-  };
+  const[Dish_Name, setDishName]= useState<string>('');
+  const[Course_Type, setCourseType] = useState<string>('');
+  const[Price, setPrice]= useState<string>('');
 
-  const clearForm = () => {
-    setDishName('');
-    setDescription('');
-    setCourseType('Main Course');
-    setMenuItems('');
-    setPrice('');
-  };
+ const [Workouts, setWorkouts] = useState<DishDetails[]>([])
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headingContainer}>
-        <Text style={styles.dishName}>ChrisHouse</Text>
-      </View>
-<SafeAreaView style={styles.cotainer}>
-  <View style={Styles.headingContainer}>
-    <Text style={Styles.Homescreen}>ChrisHouse</Text>
-    </View>
-      <View style={styles.listView}>
-        <FlatList
-          style={styles.listStyle}
-          data={dishes}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.itemContainer}>
-              <Text style={styles.detailText}>Dish Name: {item.DishName}</Text>
-              <Text style={styles.detailText}>Description: {item.Description}</Text>
-              <Text style={styles.detailText}>Course Type: {item.Course_Type}</Text>
-              <Text style={styles.detailText}>Menu Items: {item.MenuItems}</Text>
-              <Text style={styles.detailText}>Price: ${item.Price.toFixed(2)}</Text>
-              <Text style-={Styles.detailText}>AveragePrice:${item.AveragePrice.toFixed(2)}</Text>
-            </View>
-          )}
-        />
-      </View>
+ const CourseType = ['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Desert'];//User will choose whatever their prefer under coursetype.
+const [totalPrice, setPricee] = useState<number>(0)
+const totalworkouts = Workouts
+ const handleSubmit =() => {}
 
-      <View style={styles.userInputView}>
-        <TextInput
-          style={styles.input}
-          placeholder="Dish Name"
-          value={dishName}
-          onChangeText={setDishName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          value={description}
-          onChangeText={setDescription}
-        />
-        
-        <Picker
-          style={styles.input}
-          selectedValue={courseType}
-          onValueChange={(itemValue) => setCourseType(itemValue)}
-        >
-          <Picker.Item label="Starter" value="Starter" />
-          <Picker.Item label="Main Course" value="Main Course" />
-          <Picker.Item label="Dessert" value="Dessert" />
-        </Picker>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Menu Items"
-          value={menuItems}
-          onChangeText={setMenuItems}
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Price"
-          value={price}
-          onChangeText={setPrice}
-          keyboardType="numeric"
-        />
-
-        <TouchableHighlight style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableHighlight>
-      </View>
-    </SafeAreaView>
-  );
+  if (Dish_Name&& Course_Type && Price && parseInt(Price) > 0) {
+    const DishDetails= {
+  Dish_Name: Dish_Name,
+  Course_Type:Course_Type,
+  Price: parseInt(Price),
 };
+setCourseType
+setDishName
+setPrice
 
+ }
+ MenuItems: //Breakfast: Cereal, Toast&Eggs, Smootie
+ //Brunch: Combine breakfast and lunch
+ //Lunch: Burgers& chips, Sushi, Jollof rice, Usu& steam bread
+ //Dinner: Cream Pasta, Mac& Cheese, Creamy stamp
+ //Desert: Ice cream, waffles, pancakes, cheesecake
+
+ // Beverages: Non-alcohol champagne , apple juice , orange , water and alcohol
+ // These are the items that chris offer.
+
+
+  return(
+<SafeAreaView style={styles.container}>
+<View style={styles.headingContainer}>
+<Text>CHRISHOUSE</Text> // Chris House is biscally the name of the chef that im working for and i named my app after him.
+</View>
+
+<View style={styles.summaryContainer}>
+  <Text style={styles.summaryHeading}>TODAY'S MENU</Text> // Under todays menu their will be a display of menu offered on a specific
+  day , example: Monday ; Steam bread& usu , Fries with apple juice
+</View>
+
+<View>
+  <Text style={styles.summaryText}>Total Menu Items: </Text>
+  <Text style={styles.summaryText}>Total Price: {totalPrice}</Text> // Total price of how much the user will spend/pay.
+
+</View>
+
+<View style={styles.listview}>
+
+  
+<View style={styles.itemContainer}> 
+<Text style={styles.detailText}>Dish_Name:{}</Text>
+<Text style={styles.detailText}> foodType:{}</Text>
+<Text style={styles.detailText}>Price:{}</Text>
+
+</View>
+</View>
+<View style={styles.userInputView}>
+<TextInput placeholder='Dish_Name' value={Dish_Name} onChangeText={setDishName}></TextInput>
+
+<TextInput placeholder='Course_Type' value={Course_Type} onChangeText={setCourseType}></TextInput>
+<Picker style={styles.input}
+
+selectedValue={CourseType}
+onValueChange={(itemValue) => setCourseType}>
+
+     {CourseType.map((CourseType)=>(
+<Picker.Item label={CourseType} value={CourseType} key={CourseType}/>
+     
+     ))}
+
+<TextInput placeholder='Price' value={Course_Type} onChangeText={setPrice}></TextInput>
+
+
+</Picker>
+
+
+<TouchableHighlight style={styles.button}>
+<Text>Save</Text>
+</TouchableHighlight>
+
+
+</View>
+</SafeAreaView>
+  )
+}
+    
 const styles = StyleSheet.create({
+
+
   container: {
     flex: 1,
     padding: 20,
-    marginVertical: 1,
-    backgroundColor: 'white',
-  },
-  headingContainer: {
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-    width: '100%',
-  },
-  dishName: {
-    fontSize: 38,
-    fontWeight: 'bold',
-    color: '#583E96',
-  },
-  listView: {
-    flex: 1,
-    width: '100%',
-    borderRadius: 10,
-    backgroundColor: 'black',
-    marginBottom: 20,
-  },
-  userInputView: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    backgroundColor: '#CBC3E3',
-    padding: 16,
-    borderRadius: 10,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    backgroundColor: 'white',
-    paddingHorizontal: 11,
-    marginVertical: 5,
-    borderRadius: 5,
-    color: 'grey',
-    fontSize: 20,
-  },
-  button: {
+    marginVertical:1,
     backgroundColor: '#fff',
-    paddingVertical: 15,
-    borderRadius: 40, // for round corners
-    marginVertical: 10,
+  
+  },
+  headingContainer:{
+    backgroundColor: '#BDB505',
     alignItems: 'center',
-    marginTop: 20,
+    justifyContent:'center',
+    marginBottom:90,
+    width:'100%',
+
   },
-  buttonText: {
-    color: 'black',
-    fontSize: 25,
+  ChrisHouse:{
+    fontSize: 36,
     fontWeight: 'bold',
+    color:'white',
   },
-  listStyle: {
-    maxHeight: 800,
+  listview:{
+    marginTop:-10,
+    width:'100%',
+    height:500,
+    borderRadius:10,
+    backgroundColor:'#ECECEC'
+
   },
-  itemContainer: {
-    flex: 1,
+  userInputView:{
+    alignItems:'center',
+    justifyContent:'flex-start',
     width: '100%',
-    backgroundColor: '#BDB5D5',
+    marginVertical: 5,
+    backgroundColor:'#CBC3E3',
+    padding:15,
+    marginTop: 40,
+    marginBottom: 45,
+    borderRadius: 10,
+  },
+  input:{
+    width: '100%',
+    height: 35,
+    backgroundColor:'pink',
+    paddingHorizontal:10,
+    marginVertical:-15,
+    borderRadius: 5,
+    color:'black',
+    marginTop:30,
+    fontSize:25,
+  },
+  button:{
+    backgroundColor:'#BDB505',
+    paddingVertical:16,
+    paddingHorizontal:41,
+    borderRadius:41,// For rounded corners
+    marginVertical: 11,
+    alignItems:'center',
+    marginTop: 40,
+
+  },
+  liststyle: {
+
+
+  },
+  itemContainer:{
+    flex: 1,
+    width:500,
+    backgroundColor:'white',
     alignItems: 'center',
     justifyContent: 'space-around',
     marginVertical: 10,
-    padding: 20,
+    padding: 10,
+    marginLeft: 10,
     borderRadius: 10,
   },
-  detailText: {
-    color: '#5B3E96',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
+detailText:{
+  color:'black',
+  fontSize:22,
+  fontWeight:'bold'
+},
+summaryContainer: {
+backgroundColor: 'pink',
+padding: 15,
+borderRadius: 25,
+marginTop: 20,
+alignItems: 'flex-start',
+},
+summaryHeading: {
+  fontSize: 23,
+  fontWeight: 'bold',
+  marginBottom:22,
+},
+summaryText:{
+  fontSize: 20,
+  fontWeight:'bold',
+  color: 'pink'
+},
+handleRemoval:{
+fontSize:20,
+fontWeight:'bold',
+color:'pink',
 
-export default Component;
+},
+workoutItem:{
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: 11,
+  paddingHorizontal: 6,
+  shadowColor: '#000',
+},
+Picker:{
+  backgroundColor: '#f0f5f9',//light gray background colour for picker
+  padding: 14,
+  marginBottom: 10,
+  borderRadius: 7,
+  borderColor: 'pink'// pink border for picker,
+},
+display: {
+  backgroundColor:'peach white',// peach white background for summary section
+  padding: 15,
+  borderRadius: 9,// slightly rounder corner for the border
+  marginBottom: 20,
+  alignItems: 'center',
+}
+}
+);

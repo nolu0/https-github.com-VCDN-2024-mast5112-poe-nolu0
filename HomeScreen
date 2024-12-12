@@ -1,0 +1,25 @@
+import {Picker } from '@react-native-picker/picker'
+import React, { useState } from "react";
+import { DishDetails } from '../type';
+
+
+export default function App() {
+
+	const[Dish_Name, setDishName]= useState<string>('');
+	const[Course_Type, setCourseType] = useState<string>('');
+	const[Price, setPrice]= useState<string>('');
+
+	const CourseType = ['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Desert'];//User will choose whatever their prefer under coursetype.
+const [totalPrice, setPricee] = useState<number>(0)
+
+//Breakfast: Cereal, Toast&Eggs, Smootie
+ //Brunch: Combine breakfast and lunch
+ //Lunch: Burgers& chips, Sushi, Jollof rice, Usu& steam bread
+ //Dinner: Cream Pasta, Mac& Cheese, Creamy stamp
+ //Desert: Ice cream, waffles, pancakes, cheesecake
+
+ // Beverages: Non-alcohol champagne , apple juice , orange , water and alcohol
+ // These are the items that chris offer
+}  
+
+
